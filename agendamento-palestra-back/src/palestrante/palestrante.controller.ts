@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { PalestranteService } from './infra/palestrante.service';
 import { CreatePalestranteDto } from './dto/create-palestrante.dto';
+import { UpdatePalestranteDto } from './dto/update-palestrante.dto';
 
 @Controller('palestrante')
 export class PalestranteController {
@@ -9,5 +10,13 @@ export class PalestranteController {
   @Post()
   async createPalestrante(@Body() createPalestranteDto: CreatePalestranteDto) {
     return this.palestranteService.create(createPalestranteDto);
+  }
+
+  @Put(':id')
+  async updatePalestrante(
+    @Param('id') id: number,
+    @Body() updatePalestranteDto: UpdatePalestranteDto,
+  ) {
+    return this.palestranteService.update(id, updatePalestranteDto);
   }
 }
