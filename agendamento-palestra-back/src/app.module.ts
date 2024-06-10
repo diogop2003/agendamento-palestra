@@ -6,6 +6,9 @@ import { TemaModule } from './tema/tema.module';
 import { PalestranteController } from './palestrante/palestrante.controller';
 import { Palestrante } from './palestrante/infra/palestrante.entity';
 import { PalestranteModule } from './palestrante/palestrante.module';
+import { PalestraModule } from './palestra/palestra.module';
+import { PalestraController } from './palestra/palestra.controller';
+import { Palestra } from './palestra/infra/palestra.entity';
 
 @Module({
   imports: [
@@ -16,13 +19,14 @@ import { PalestranteModule } from './palestrante/palestrante.module';
       username: 'diogo',
       password: 'diogo123',
       database: 'agendamento_palestra',
-      entities: [Tema, Palestrante],
+      entities: [Tema, Palestrante, Palestra],
       synchronize: true,
     }),
     TemaModule,
     PalestranteModule,
+    PalestraModule,
   ],
-  controllers: [TemaController, PalestranteController],
+  controllers: [TemaController, PalestranteController, PalestraController],
   providers: [],
 })
 export class AppModule {}
