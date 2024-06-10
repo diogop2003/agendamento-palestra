@@ -8,11 +8,11 @@ export class Palestra {
   id: number;
 
   @ManyToOne(() => Palestrante, (palestrante) => palestrante.palestras, {
-    eager: true,
+    nullable: true,
   })
   palestrante: Palestrante;
 
-  @ManyToOne(() => Tema, (tema) => tema.palestras, { eager: true })
+  @ManyToOne(() => Tema, (tema) => tema.palestras, { nullable: true })
   tema: Tema;
 
   @Column()
