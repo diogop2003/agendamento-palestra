@@ -25,7 +25,7 @@ export class PalestraService {
       where: { id },
     });
     if (!palestra) {
-      throw new NotFoundException(`Tema com id ${id} não encontrado`);
+      throw new NotFoundException(`Palestra com id ${id} não encontrado`);
     }
     Object.assign(palestra, updatePalestraDto);
     return this.palestraRepository.save(palestra);
