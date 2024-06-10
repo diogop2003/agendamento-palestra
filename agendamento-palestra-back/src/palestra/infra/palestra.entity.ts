@@ -1,15 +1,19 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Palestrante } from 'src/palestrante/infra/palestrante.entity';
+import { Tema } from 'src/tema/infra/tema.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Palestra {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  palestrante_id: number;
+  @ManyToOne(() => Palestrante, (palestrante) => palestrante.palestras, {
+    eager: true,
+  })
+  palestrante: Palestrante;
 
-  @Column()
-  tema_id: number;
+  @ManyToOne(() => Tema, (tema) => tema.palestras, { eager: true })
+  tema: Tema;
 
   @Column()
   data: string;

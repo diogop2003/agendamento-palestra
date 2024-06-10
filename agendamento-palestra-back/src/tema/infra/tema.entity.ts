@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Palestra } from 'src/palestra/infra/palestra.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Tema {
@@ -13,4 +14,7 @@ export class Tema {
 
   @Column()
   resumo: string;
+
+  @OneToMany(() => Palestra, (palestra) => palestra.tema)
+  palestras: Palestra[];
 }
