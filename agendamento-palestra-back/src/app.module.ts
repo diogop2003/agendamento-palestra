@@ -6,6 +6,8 @@ import { TemaModule } from './tema/tema.module';
 import { PalestranteController } from './palestrante/palestrante.controller';
 import { Palestrante } from './palestrante/infra/palestrante.entity';
 import { PalestranteModule } from './palestrante/palestrante.module';
+import { PalestraModule } from './palestra/palestra.module';
+import { PalestraController } from './palestra/palestra.controller';
 
 @Module({
   imports: [
@@ -21,8 +23,9 @@ import { PalestranteModule } from './palestrante/palestrante.module';
     }),
     TemaModule,
     PalestranteModule,
+    PalestraModule,
   ],
-  controllers: [TemaController, PalestranteController],
+  controllers: [TemaController, PalestranteController, PalestraController],
   providers: [],
 })
 export class AppModule {}
