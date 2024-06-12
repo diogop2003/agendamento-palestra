@@ -1,23 +1,23 @@
-# Etapa de build
-FROM node:18-alpine as build
+# Usar uma imagem base Node.js mais recente
+FROM node:18
 
-WORKDIR /app
+# Definir diretório de trabalho
+WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
-RUN npm install
+# Copiar package.json e package-lock.json
+COPY package*.json ./
 
+# Instalar dependências
+RUN npm i -E
+
+# Copiar todo o código para o contêiner
 COPY . .
+
+# Compilar a aplicação
 RUN npm run build
 
-# Etapa de produção
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=build /app/dist ./dist
-COPY package.json package-lock.json ./
-RUN npm install --only=production
-
+# Expor a porta da aplicação
 EXPOSE 3000
 
-CMD ["node", "dist/main"]
+# Comando para iniciar a aplicação
+CMD ["npm", "run", "start:prod"]
