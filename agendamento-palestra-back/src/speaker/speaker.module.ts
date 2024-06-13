@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { SpeakerController } from './speaker.controller';
 import { SpeakerService } from './speaker.service';
-import { Speaker } from './infra/speaker.entity';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Speaker])],
+  imports: [DatabaseModule],
   providers: [SpeakerService],
   controllers: [SpeakerController],
   exports: [SpeakerService],
