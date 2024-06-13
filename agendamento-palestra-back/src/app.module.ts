@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { PalestraModule } from './palestra/palestra.module';
+import { LectureModule } from './lecture/lecture.module';
+import { ThemeModule } from './theme/theme.module';
+import { SpeakerModule } from './speaker/speaker.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // Habilita o uso de variáveis de ambiente
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -16,7 +18,9 @@ import { PalestraModule } from './palestra/palestra.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    PalestraModule,
+    LectureModule,
+    ThemeModule,
+    SpeakerModule,
   ],
 })
 export class AppModule {}
