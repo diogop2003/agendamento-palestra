@@ -8,7 +8,7 @@ export class ThemeService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async create(createThemeDto: CreateThemeDto): Promise<any> {
-    const query = `INSERT INTO theme (title, subject, summary) VALUES (?, ?, ?)`;
+    const query = `INSERT INTO tbl_theme (title, subject, summary) VALUES (?, ?, ?)`;
     const params = [
       createThemeDto.title,
       createThemeDto.subject,
@@ -19,21 +19,29 @@ export class ThemeService {
   }
 
   async update(id: number, updateThemeDto: UpdateThemeDto): Promise<any> {
-    const [theme] = await this.databaseService.query(
-      `SELECT * FROM theme WHERE id = ?`,
+    const theme = await this.databaseService.query(
+      `SELECT * FROM tbl_theme WHERE id = ?`,
       [id],
     );
-    if (!theme) {
+    if (!theme.length) {
       throw new NotFoundException(`Theme with id ${id} not found`);
     }
-    const query = `UPDATE theme SET title = ?, subject = ?, summary = ? WHERE id = ?`;
+
+    const query = `
+      UPDATE tbl_theme
+      SET title = COALESCE(?, title),
+          subject = COALESCE(?, subject),
+          summary = COALESCE(?, summary)
+      WHERE id = ?
+    `;
     const params = [
-      updateThemeDto.title || theme.title,
-      updateThemeDto.subject || theme.subject,
-      updateThemeDto.summary || theme.summary,
+      updateThemeDto.title || theme[0].title,
+      updateThemeDto.subject || theme[0].subject,
+      updateThemeDto.summary || theme[0].summary,
       id,
     ];
     await this.databaseService.query(query, params);
+
     return { id, ...updateThemeDto };
   }
 }

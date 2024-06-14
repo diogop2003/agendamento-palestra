@@ -7,6 +7,13 @@ export class DatabaseService {
   private pool: mysql.Pool;
 
   constructor(private configService: ConfigService) {
+    console.log({
+      host: this.configService.get<string>('DB_HOST'),
+      user: this.configService.get<string>('DB_USERNAME'),
+      password: this.configService.get<string>('DB_PASSWORD'),
+      database: this.configService.get<string>('DB_DATABASE'),
+    });
+
     this.pool = mysql.createPool({
       host: this.configService.get<string>('DB_HOST'),
       user: this.configService.get<string>('DB_USERNAME'),
@@ -19,6 +26,7 @@ export class DatabaseService {
   }
 
   async query(query: string, params: any[] = []): Promise<any> {
+    console.log(`Executing query: ${query} with params: ${params}`);
     const [results] = await this.pool.execute(query, params);
     return results;
   }

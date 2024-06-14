@@ -1,23 +1,21 @@
-# Usar uma imagem base Node.js mais recente
 FROM node:18
 
-# Definir diretório de trabalho
-WORKDIR /usr/src/app
+# Instalação do mysql-client
+RUN apt-get update \
+    && apt-get install -y default-mysql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copiar package.json e package-lock.json
+# Define o diretório de trabalho da aplicação
+WORKDIR /app
+
+# Copia o package.json e package-lock.json (se existir)
 COPY package*.json ./
 
-# Instalar dependências
-RUN npm i -E
+# Instala as dependências da aplicação
+RUN npm install
 
-# Copiar todo o código para o contêiner
+# Copia o restante dos arquivos da aplicação
 COPY . .
 
-# Compilar a aplicação
-RUN npm run build
-
-# Expor a porta da aplicação
-EXPOSE 3000
-
-# Comando para iniciar a aplicação
-CMD ["npm", "run", "start:prod"]
+# Comando padrão para iniciar a aplicação
+CMD ["npm", "start"]

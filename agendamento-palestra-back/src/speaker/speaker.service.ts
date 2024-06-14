@@ -8,7 +8,8 @@ export class SpeakerService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async create(createSpeakerDto: CreateSpeakerDto): Promise<any> {
-    const query = `INSERT INTO _tbl_speakers (name, phone, email) VALUES (?, ?, ?)`;
+    const query =
+      'INSERT INTO tbl_speaker (name, phone, email) VALUES (?, ?, ?)';
     const params = [
       createSpeakerDto.name,
       createSpeakerDto.phone,
@@ -20,13 +21,14 @@ export class SpeakerService {
 
   async update(id: number, updateSpeakerDto: UpdateSpeakerDto): Promise<any> {
     const [speaker] = await this.databaseService.query(
-      `SELECT * FROM speakers WHERE id = ?`,
+      'SELECT * FROM tbl_speaker WHERE id = ?',
       [id],
     );
     if (!speaker) {
       throw new NotFoundException(`Speaker with id ${id} not found`);
     }
-    const query = `UPDATE speakers SET name = ?, phone = ?, email = ? WHERE id = ?`;
+    const query =
+      'UPDATE tbl_speaker SET name = ?, phone = ?, email = ? WHERE id = ?';
     const params = [
       updateSpeakerDto.name || speaker.name,
       updateSpeakerDto.phone || speaker.phone,
