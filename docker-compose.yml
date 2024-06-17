@@ -5,7 +5,7 @@ services:
     container_name: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: agendamento_palestra
+      MYSQL_DATABASE: db_lecture_scheduling
       MYSQL_USER: diogo
       MYSQL_PASSWORD: diogo123
     ports:
@@ -23,7 +23,7 @@ services:
       DB_PORT: 3306
       DB_USERNAME: diogo
       DB_PASSWORD: diogo123
-      DB_DATABASE: agendamento_palestra
+      DB_DATABASE: db_lecture_scheduling
     depends_on:
       - mariadb
     ports:

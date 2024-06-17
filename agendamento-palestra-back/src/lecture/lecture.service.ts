@@ -1,90 +1,76 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Theme } from 'src/theme/infra/theme.entity';
-import { Lecture } from './infra/lecture.entity';
+import { DatabaseService } from '../database/database.service';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { UpdateLectureDto } from './dto/update.lecture.dto';
-import { Speaker } from 'src/speaker/infra/speaker.entity';
 
 @Injectable()
 export class LectureService {
-  constructor(
-    @InjectRepository(Lecture)
-    private readonly lectureRepository: Repository<Lecture>,
-    @InjectRepository(Theme)
-    private readonly themeRepository: Repository<Theme>,
-    @InjectRepository(Speaker)
-    private readonly speakerRepository: Repository<Speaker>,
-  ) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
-  async create(createPalestraDto: CreateLectureDto): Promise<Lecture> {
-    const { speaker_id, theme_id, date, time } = createPalestraDto;
+  async create(createLectureDto: CreateLectureDto): Promise<any> {
+    const { speaker_id, theme_id, date, time } = createLectureDto;
 
-    const theme = await this.themeRepository.findOne({
-      where: { id: theme_id },
-    });
-    if (!theme) {
+    const theme = await this.databaseService.query(
+      `SELECT * FROM tbl_theme WHERE id = ?`,
+      [theme_id],
+    );
+    if (theme.length === 0) {
       throw new NotFoundException(`Theme with id ${theme_id} not found`);
     }
 
-    const speaker = await this.speakerRepository.findOne({
-      where: { id: speaker_id },
-    });
-    if (!speaker) {
-      throw new NotFoundException(`Speaker with id ${speaker_id} nor found`);
+    const speaker = await this.databaseService.query(
+      `SELECT * FROM tbl_speaker WHERE id = ?`,
+      [speaker_id],
+    );
+    if (speaker.length === 0) {
+      throw new NotFoundException(`Speaker with id ${speaker_id} not found`);
     }
 
-    const lecture = this.lectureRepository.create({
-      theme,
-      speaker,
-      date,
-      time,
-    });
+    const query = `
+      INSERT INTO tbl_lecture (theme_id, speaker_id, date, time)
+      VALUES (?, ?, ?, ?)
+    `;
+    const params = [theme_id, speaker_id, date, time];
+    const result = await this.databaseService.query(query, params);
 
-    return this.lectureRepository.save(lecture);
+    return { id: result.insertId, ...createLectureDto };
   }
 
-  async update(
-    id: number,
-    updatePalestraDto: UpdateLectureDto,
-  ): Promise<Lecture> {
-    const lecture = await this.lectureRepository.findOne({ where: { id } });
-    if (!lecture) {
+  async update(id: number, updateLectureDto: UpdateLectureDto): Promise<any> {
+    const lecture = await this.databaseService.query(
+      `SELECT * FROM tbl_lecture WHERE id = ?`,
+      [id],
+    );
+    if (lecture.length === 0) {
       throw new NotFoundException(`Lecture with id ${id} not found`);
     }
 
-    if (updatePalestraDto.theme_id) {
-      const theme = await this.themeRepository.findOne({
-        where: { id: updatePalestraDto.theme_id },
-      });
-      if (!theme) {
-        throw new NotFoundException(
-          `Theme with id ${updatePalestraDto.theme_id} not found`,
-        );
-      }
-      lecture.theme = theme;
-    }
+    const query = `
+      UPDATE tbl_lecture
+      SET theme_id = COALESCE(?, theme_id),
+          speaker_id = COALESCE(?, speaker_id),
+          date = COALESCE(?, date),
+          time = COALESCE(?, time)
+      WHERE id = ?
+    `;
+    const params = [
+      updateLectureDto.theme_id || lecture[0].theme_id,
+      updateLectureDto.speaker_id || lecture[0].speaker_id,
+      updateLectureDto.date || lecture[0].date,
+      updateLectureDto.time || lecture[0].time,
+      id,
+    ];
+    await this.databaseService.query(query, params);
 
-    if (updatePalestraDto.speaker_id) {
-      const speaker = await this.speakerRepository.findOne({
-        where: { id: updatePalestraDto.speaker_id },
-      });
-      if (!speaker) {
-        throw new NotFoundException(
-          `Speaker with id ${updatePalestraDto.speaker_id} not found`,
-        );
-      }
-      lecture.speaker = speaker;
-    }
-
-    Object.assign(lecture, updatePalestraDto);
-    return this.lectureRepository.save(lecture);
+    return { id, ...updateLectureDto };
   }
 
   async remove(id: number): Promise<void> {
-    const result = await this.lectureRepository.delete(id);
-    if (result.affected === 0) {
+    const result = await this.databaseService.query(
+      `DELETE FROM tbl_lecture WHERE id = ?`,
+      [id],
+    );
+    if (result.affectedRows === 0) {
       throw new NotFoundException(`Lecture with id ${id} not found`);
     }
   }

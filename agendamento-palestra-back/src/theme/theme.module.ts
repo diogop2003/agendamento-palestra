@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThemeController } from './theme.controller';
-import { Theme } from './infra/theme.entity';
 import { ThemeService } from './theme.service';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Theme])],
+  imports: [DatabaseModule],
   providers: [ThemeService],
   controllers: [ThemeController],
   exports: [ThemeService],
