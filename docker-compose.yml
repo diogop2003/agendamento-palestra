@@ -3,11 +3,8 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: db_lecture_scheduling
-      MYSQL_USER: diogo
-      MYSQL_PASSWORD: diogo123
+    env_file:
+      - ./agendamento-palestra-back/.env
     ports:
       - '3306:3306'
     volumes:
@@ -18,12 +15,8 @@ services:
       context: ./agendamento-palestra-back
       dockerfile: Dockerfile
     container_name: backend
-    environment:
-      DB_HOST: mariadb
-      DB_PORT: 3306
-      DB_USERNAME: diogo
-      DB_PASSWORD: diogo123
-      DB_DATABASE: db_lecture_scheduling
+    env_file:
+      - ./agendamento-palestra-back/.env
     depends_on:
       - mariadb
     ports:

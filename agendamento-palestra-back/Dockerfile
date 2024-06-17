@@ -11,11 +11,11 @@ WORKDIR /app
 # Copia o package.json e package-lock.json (se existir)
 COPY package*.json ./
 
-# Instala as dependências da aplicação
-RUN npm install
+# Instala as dependências da aplicação e o nodemon
+RUN npm i -E && npm install -g @nestjs/cli nodemon
 
 # Copia o restante dos arquivos da aplicação
 COPY . .
 
-# Comando padrão para iniciar a aplicação
-CMD ["npm", "start"]
+# Comando padrão para iniciar a aplicação no modo desenvolvimento
+CMD ["nodemon", "-L", "--watch", "src", "--exec", "nest", "start", "--watch"]
