@@ -74,4 +74,22 @@ export class LectureService {
       throw new NotFoundException(`Lecture with id ${id} not found`);
     }
   }
+
+  async getById(id: number): Promise<any> {
+    const lecture = await this.databaseService.query(
+      `SELECT * FROM tbl_lecture WHERE id = ?`,
+      [id],
+    );
+    if (!lecture.length) {
+      throw new NotFoundException(`Lecture with id ${id} not found`);
+    }
+    return lecture[0];
+  }
+
+  async getAll(): Promise<any[]> {
+    const lecture = await this.databaseService.query(
+      `SELECT * FROM tbl_lecture`,
+    );
+    return lecture;
+  }
 }

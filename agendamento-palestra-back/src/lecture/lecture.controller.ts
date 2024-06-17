@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Param,
+  Post,
+  Put,
+  Get,
+} from '@nestjs/common';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { UpdateLectureDto } from './dto/update.lecture.dto';
 import { LectureService } from './lecture.service';
@@ -23,5 +31,15 @@ export class LectureController {
   @Delete(':id')
   remove(@Param('id') id: number): Promise<void> {
     return this.lectureService.remove(id);
+  }
+
+  @Get(':id')
+  async getThemeById(@Param('id') id: number): Promise<any> {
+    return await this.lectureService.getById(id);
+  }
+
+  @Get()
+  async getAllThemes(): Promise<any[]> {
+    return await this.lectureService.getAll();
   }
 }
