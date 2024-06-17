@@ -4,7 +4,7 @@ services:
     image: mariadb:latest
     container_name: mariadb
     env_file:
-      - ./agendamento-palestra-back/.env  # Caminho para o arquivo .env
+      - ./agendamento-palestra-back/.env
     ports:
       - '3306:3306'
     volumes:
@@ -16,7 +16,7 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     env_file:
-      - ./agendamento-palestra-back/.env  # Caminho para o arquivo .env
+      - ./agendamento-palestra-back/.env
     depends_on:
       - mariadb
     ports:
