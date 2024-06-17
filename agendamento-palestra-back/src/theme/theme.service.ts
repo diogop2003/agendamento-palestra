@@ -44,4 +44,20 @@ export class ThemeService {
 
     return { id, ...updateThemeDto };
   }
+
+  async getById(id: number): Promise<any> {
+    const theme = await this.databaseService.query(
+      `SELECT * FROM tbl_theme WHERE id = ?`,
+      [id],
+    );
+    if (!theme.length) {
+      throw new NotFoundException(`Theme with id ${id} not found`);
+    }
+    return theme[0];
+  }
+
+  async getAll(): Promise<any[]> {
+    const themes = await this.databaseService.query(`SELECT * FROM tbl_theme`);
+    return themes;
+  }
 }
