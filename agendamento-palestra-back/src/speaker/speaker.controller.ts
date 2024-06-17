@@ -1,4 +1,4 @@
-import { Controller, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Post, Put, Body, Param, Get } from '@nestjs/common';
 import { CreateSpeakerDto } from './dto/create-speaker.dto';
 import { UpdateSpeakerDto } from './dto/update-speaker.dto';
 import { SpeakerService } from './speaker.service';
@@ -18,5 +18,15 @@ export class SpeakerController {
     @Body() updateSpeakerDto: UpdateSpeakerDto,
   ) {
     return this.speakerService.update(id, updateSpeakerDto);
+  }
+
+  @Get(':id')
+  async getThemeById(@Param('id') id: number): Promise<any> {
+    return await this.speakerService.getById(id);
+  }
+
+  @Get()
+  async getAllThemes(): Promise<any[]> {
+    return await this.speakerService.getAll();
   }
 }

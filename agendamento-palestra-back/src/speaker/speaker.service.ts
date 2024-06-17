@@ -38,4 +38,22 @@ export class SpeakerService {
     await this.databaseService.query(query, params);
     return { id, ...updateSpeakerDto };
   }
+
+  async getById(id: number): Promise<any> {
+    const speaker = await this.databaseService.query(
+      `SELECT * FROM tbl_speaker WHERE id = ?`,
+      [id],
+    );
+    if (!speaker.length) {
+      throw new NotFoundException(`Speaker with id ${id} not found`);
+    }
+    return speaker[0];
+  }
+
+  async getAll(): Promise<any[]> {
+    const speaker = await this.databaseService.query(
+      `SELECT * FROM tbl_speaker`,
+    );
+    return speaker;
+  }
 }
