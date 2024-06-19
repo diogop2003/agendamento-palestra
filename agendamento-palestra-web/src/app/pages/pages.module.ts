@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { LectureComponent } from './lecture/lecture.component';
 import { PagesRoutesModule } from './pages.routes';
 import { SpeakerComponent } from './speaker/speaker.component';
+import { ThemeComponent } from './theme/theme.component';
 
 
 
 @NgModule({
   declarations: [
     LectureComponent,
-    SpeakerComponent
+    SpeakerComponent,
+    ThemeComponent
   ],
   imports: [
     CommonModule,
