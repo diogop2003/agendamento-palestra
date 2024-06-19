@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "agendamento-palestra": {
+    "agendamento-palestra-web": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/agendamento-palestra",
+            "outputPath": "dist/agendamento-palestra-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "agendamento-palestra:build:production"
+              "buildTarget": "agendamento-palestra-web:build:production"
             },
             "development": {
-              "buildTarget": "agendamento-palestra:build:development"
+              "buildTarget": "agendamento-palestra-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "113929eb-cb2a-44fa-b4fe-06bf3ce6b220"
   }
 }
