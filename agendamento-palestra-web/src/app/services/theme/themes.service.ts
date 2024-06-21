@@ -16,4 +16,8 @@ export class ThemesService {
   getThemes(): Observable<Theme[]> {
     return this.http.get<Theme[]>(`${this.apiUrl}/theme`);
   }
+
+  addTheme(theme: Theme): Observable<Theme> {
+    return this.http.post<Theme>(`${this.apiUrl}/theme`, theme);
+  }
 }
