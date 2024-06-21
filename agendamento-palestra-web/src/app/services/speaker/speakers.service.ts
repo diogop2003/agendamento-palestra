@@ -18,4 +18,7 @@ export class SpeakersService {
     return this.http.get<Speaker[]>(`${this.apiUrl}/speaker`);
   }
 
+  addSpeaker(speaker: Speaker): Observable<Speaker> {
+    return this.http.post<Speaker>(`${this.apiUrl}/speaker`, speaker);
+  }
 }

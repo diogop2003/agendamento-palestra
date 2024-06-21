@@ -3,6 +3,7 @@ import { SpeakersService } from '../../services/speaker/speakers.service';
 import { Speaker } from '../../services/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAddSpeakerComponent } from './modal-add-speaker/modal-add-speaker.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-speaker',
@@ -11,6 +12,7 @@ import { ModalAddSpeakerComponent } from './modal-add-speaker/modal-add-speaker.
 })
 export class SpeakerComponent implements OnInit {
   speakers: Speaker[] = [];
+  speakersSubscription: Subscription | undefined;
 
   constructor(private speakersService: SpeakersService, public dialog: MatDialog) {}
 
@@ -19,11 +21,20 @@ export class SpeakerComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalAddSpeakerComponent, {});
+    const dialogRef = this.dialog.open(ModalAddSpeakerComponent, {
+      disableClose: true,
+      panelClass: 'tailwind-modal-panel',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'added') {
+        this.getSpeakers();
+      }
+    });
   }
 
   getSpeakers(): void {
-    this.speakersService.getSpeakers().subscribe({
+    this.speakersSubscription = this.speakersService.getSpeakers().subscribe({
       next: (data: Speaker[]) => {
         this.speakers = data;
       },
@@ -34,5 +45,11 @@ export class SpeakerComponent implements OnInit {
         console.log('Speakers fetching completed.');
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.speakersSubscription) {
+      this.speakersSubscription.unsubscribe();
+    }
   }
 }

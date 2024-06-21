@@ -5,6 +5,7 @@ import { PagesRoutesModule } from './pages.routes';
 import { SpeakerComponent } from './speaker/speaker.component';
 import { ThemeComponent } from './theme/theme.component';
 import { ModalAddSpeakerComponent } from './speaker/modal-add-speaker/modal-add-speaker.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { ModalAddSpeakerComponent } from './speaker/modal-add-speaker/modal-add-
   ],
   imports: [
     CommonModule,
-    PagesRoutesModule
+    PagesRoutesModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
