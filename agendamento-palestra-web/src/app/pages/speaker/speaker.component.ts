@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeakersService } from '../../services/speaker/speakers.service';
 import { Speaker } from '../../services/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalAddSpeakerComponent } from './modal-add-speaker/modal-add-speaker.component';
 
 @Component({
   selector: 'app-speaker',
@@ -10,10 +12,14 @@ import { Speaker } from '../../services/interfaces';
 export class SpeakerComponent implements OnInit {
   speakers: Speaker[] = [];
 
-  constructor(private speakersService: SpeakersService) {}
+  constructor(private speakersService: SpeakersService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getSpeakers();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalAddSpeakerComponent, {});
   }
 
   getSpeakers(): void {
