@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Theme } from '../../services/interfaces';
 import { ThemesService } from '../../services/theme/themes.service';
+import { ModalAddThemeComponent } from './modal-add-theme/modal-add-theme.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-theme',
@@ -10,10 +12,23 @@ import { ThemesService } from '../../services/theme/themes.service';
 export class ThemeComponent {
   themes: Theme[] = [];
 
-  constructor(private themeService: ThemesService) {}
+  constructor(private themeService: ThemesService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getThemes();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalAddThemeComponent, {
+      disableClose: true,
+      panelClass: 'tailwind-modal-panel',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'added') {
+        this.getThemes();
+      }
+    });
   }
 
   getThemes(): void {
