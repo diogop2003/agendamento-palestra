@@ -7,6 +7,7 @@ import { ThemeComponent } from './theme/theme.component';
 import { ModalAddSpeakerComponent } from './speaker/modal-add-speaker/modal-add-speaker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalAddThemeComponent } from './theme/modal-add-theme/modal-add-theme.component';
+import { ModalEditSpeakerComponent } from './speaker/modal-edit-speaker/modal-edit-speaker.component';
 
 
 
@@ -16,7 +17,8 @@ import { ModalAddThemeComponent } from './theme/modal-add-theme/modal-add-theme.
     SpeakerComponent,
     ThemeComponent,
     ModalAddSpeakerComponent,
-    ModalAddThemeComponent
+    ModalAddThemeComponent,
+    ModalEditSpeakerComponent
   ],
   imports: [
     CommonModule,

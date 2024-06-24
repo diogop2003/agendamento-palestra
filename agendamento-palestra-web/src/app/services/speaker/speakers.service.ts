@@ -21,4 +21,12 @@ export class SpeakersService {
   addSpeaker(speaker: Speaker): Observable<Speaker> {
     return this.http.post<Speaker>(`${this.apiUrl}/speaker`, speaker);
   }
+
+  editSpeaker(id: number, speaker: Speaker): Observable<Speaker> {
+    return this.http.put<Speaker>(`${this.apiUrl}/speaker/${id}`, speaker);
+  }
+
+  getSpeakerById(id: number): Observable<Speaker> {
+    return this.http.get<Speaker>(`${this.apiUrl}/speaker/${id}`);
+  }
 }
