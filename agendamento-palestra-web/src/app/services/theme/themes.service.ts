@@ -20,4 +20,12 @@ export class ThemesService {
   addTheme(theme: Theme): Observable<Theme> {
     return this.http.post<Theme>(`${this.apiUrl}/theme`, theme);
   }
+
+  editTheme(id: number, theme: Theme): Observable<Theme> {
+    return this.http.put<Theme>(`${this.apiUrl}/theme/${id}`, theme);
+  }
+
+  getThemeById(id: number): Observable<Theme> {
+    return this.http.get<Theme>(`${this.apiUrl}/theme/${id}`);
+  }
 }
