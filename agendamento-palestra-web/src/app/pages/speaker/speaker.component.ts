@@ -4,6 +4,7 @@ import { Speaker } from '../../services/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAddSpeakerComponent } from './modal-add-speaker/modal-add-speaker.component';
 import { Subscription } from 'rxjs';
+import { ModalEditSpeakerComponent } from './modal-edit-speaker/modal-edit-speaker.component';
 
 @Component({
   selector: 'app-speaker',
@@ -33,6 +34,17 @@ export class SpeakerComponent implements OnInit {
     });
   }
 
+  openEditDialog(speakerId: number): void {
+    const dialogRef = this.dialog.open(ModalEditSpeakerComponent, {
+      data: { id: speakerId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'edit') {
+        this.getSpeakers();
+      }
+    });
+  }
   getSpeakers(): void {
     this.speakersSubscription = this.speakersService.getSpeakers().subscribe({
       next: (data: Speaker[]) => {
