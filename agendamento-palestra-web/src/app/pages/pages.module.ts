@@ -8,6 +8,7 @@ import { ModalAddSpeakerComponent } from './speaker/modal-add-speaker/modal-add-
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalAddThemeComponent } from './theme/modal-add-theme/modal-add-theme.component';
 import { ModalEditSpeakerComponent } from './speaker/modal-edit-speaker/modal-edit-speaker.component';
+import { ModalEditThemeComponent } from './theme/modal-edit-theme/modal-edit-theme.component';
 
 
 
@@ -18,7 +19,8 @@ import { ModalEditSpeakerComponent } from './speaker/modal-edit-speaker/modal-ed
     ThemeComponent,
     ModalAddSpeakerComponent,
     ModalAddThemeComponent,
-    ModalEditSpeakerComponent
+    ModalEditSpeakerComponent,
+    ModalEditThemeComponent
   ],
   imports: [
     CommonModule,

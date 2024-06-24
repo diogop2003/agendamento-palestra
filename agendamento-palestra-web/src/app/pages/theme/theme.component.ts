@@ -3,6 +3,7 @@ import { Theme } from '../../services/interfaces';
 import { ThemesService } from '../../services/theme/themes.service';
 import { ModalAddThemeComponent } from './modal-add-theme/modal-add-theme.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ModalEditThemeComponent } from './modal-edit-theme/modal-edit-theme.component';
 
 @Component({
   selector: 'app-theme',
@@ -26,6 +27,18 @@ export class ThemeComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'added') {
+        this.getThemes();
+      }
+    });
+  }
+
+  openEditDialog(themeId: number): void {
+    const dialogRef = this.dialog.open(ModalEditThemeComponent, {
+      data: { id: themeId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'edit') {
         this.getThemes();
       }
     });
