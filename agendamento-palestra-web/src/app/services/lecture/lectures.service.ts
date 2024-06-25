@@ -27,7 +27,7 @@ export class LecturesService {
   }
 
   createLecture(lecture: any): Observable<any> {
-    return this.http.post(this.apiUrl, lecture);
+    return this.http.post(`${this.apiUrl}/lectures/`, lecture);
   }
 
   updateLecture(id: string, lecture: any): Observable<any> {
