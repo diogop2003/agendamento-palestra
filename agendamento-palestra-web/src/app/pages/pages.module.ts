@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalAddThemeComponent } from './theme/modal-add-theme/modal-add-theme.component';
 import { ModalEditSpeakerComponent } from './speaker/modal-edit-speaker/modal-edit-speaker.component';
 import { ModalEditThemeComponent } from './theme/modal-edit-theme/modal-edit-theme.component';
+import { ModalAddLectureComponent } from './lecture/modal-add-lecture/modal-add-lecture.component';
 
 
 
@@ -20,7 +21,8 @@ import { ModalEditThemeComponent } from './theme/modal-edit-theme/modal-edit-the
     ModalAddSpeakerComponent,
     ModalAddThemeComponent,
     ModalEditSpeakerComponent,
-    ModalEditThemeComponent
+    ModalEditThemeComponent,
+    ModalAddLectureComponent
   ],
   imports: [
     CommonModule,

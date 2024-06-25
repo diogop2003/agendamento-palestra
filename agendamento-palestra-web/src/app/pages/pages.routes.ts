@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: LectureComponent },
   { path: 'palestrante', component: SpeakerComponent },
   { path: 'temas', component: ThemeComponent },
-
+  { path: '**', component: LectureComponent }
 ];
 
 @NgModule({

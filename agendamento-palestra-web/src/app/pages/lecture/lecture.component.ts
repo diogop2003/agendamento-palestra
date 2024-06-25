@@ -3,6 +3,8 @@ import { LecturesService } from '../../services/lecture/lectures.service';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Lecture, Speaker, Theme } from '../../services/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalAddLectureComponent } from './modal-add-lecture/modal-add-lecture.component';
 
 @Component({
   selector: 'app-lecture',
@@ -13,15 +15,15 @@ export class LectureComponent implements OnInit {
   
   lectures: Lecture[] = [];
 
-  constructor(private lecturesService: LecturesService) {}
+  constructor(private lecturesService: LecturesService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadLectures();
   }
 
   loadLectures() {
-    this.lecturesService.getLectures().subscribe(
-      (lectures: Lecture[]) => {
+    this.lecturesService.getLectures().subscribe({
+      next: (lectures: Lecture[]) => {
         const observables = lectures.map((lecture: Lecture) => {
           return forkJoin({
             speaker: this.lecturesService.getSpeaker(lecture.speaker_id),
@@ -34,19 +36,33 @@ export class LectureComponent implements OnInit {
             }))
           );
         });
-
-        forkJoin(observables).subscribe(
-          (lecturesWithDetails: Lecture[]) => {
+  
+        forkJoin(observables).subscribe({
+          next: (lecturesWithDetails: Lecture[]) => {
             this.lectures = lecturesWithDetails;
           },
-          (error) => {
+          error: (error) => {
             console.error('Erro ao carregar os detalhes das palestras:', error);
           }
-        );
+        });
       },
-      (error) => {
+      error: (error) => {
         console.error('Erro ao carregar as palestras:', error);
       }
-    );
+    });
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalAddLectureComponent, {
+      disableClose: true,
+      panelClass: 'tailwind-modal-panel',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'added') {
+        this.loadLectures();
+      }
+    });
+  }
+  
 }
