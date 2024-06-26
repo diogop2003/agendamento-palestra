@@ -34,12 +34,12 @@ export class LectureController {
   }
 
   @Get(':id')
-  async getThemeById(@Param('id') id: number): Promise<any> {
+  async getLectureById(@Param('id') id: number): Promise<any> {
     return await this.lectureService.getById(id);
   }
 
   @Get()
-  async getAllThemes(): Promise<any[]> {
+  async getAllLectures(): Promise<any[]> {
     return await this.lectureService.getAll();
   }
 }
