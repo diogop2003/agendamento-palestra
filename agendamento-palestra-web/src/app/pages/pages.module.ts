@@ -11,6 +11,7 @@ import { ModalEditSpeakerComponent } from './speaker/modal-edit-speaker/modal-ed
 import { ModalEditThemeComponent } from './theme/modal-edit-theme/modal-edit-theme.component';
 import { ModalAddLectureComponent } from './lecture/modal-add-lecture/modal-add-lecture.component';
 import { ModalEditLectureComponent } from './lecture/modal-edit-lecture/modal-edit-lecture.component';
+import { ModalRemoveLectureComponent } from './lecture/modal-remove-lecture/modal-remove-lecture.component';
 
 
 
@@ -24,7 +25,8 @@ import { ModalEditLectureComponent } from './lecture/modal-edit-lecture/modal-ed
     ModalEditSpeakerComponent,
     ModalEditThemeComponent,
     ModalAddLectureComponent,
-    ModalEditLectureComponent
+    ModalEditLectureComponent,
+    ModalRemoveLectureComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { Lecture, Speaker, Theme } from '../../services/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAddLectureComponent } from './modal-add-lecture/modal-add-lecture.component';
 import { ModalEditLectureComponent } from './modal-edit-lecture/modal-edit-lecture.component';
+import { ModalRemoveLectureComponent } from './modal-remove-lecture/modal-remove-lecture.component';
 
 @Component({
   selector: 'app-lecture',
@@ -73,6 +74,18 @@ export class LectureComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'updated') {
+        this.loadLectures();
+      }
+    });
+  }
+
+  openRemoveDialog(lectureId: number): void {
+    const dialogRef = this.dialog.open(ModalRemoveLectureComponent, {
+      data: { id: lectureId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'removed') {
         this.loadLectures();
       }
     });
