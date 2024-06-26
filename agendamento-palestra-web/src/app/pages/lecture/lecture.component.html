@@ -32,8 +32,8 @@
             <td class="w-auto py-4 text-sm text-gray-700">{{ lecture.speaker }}</td>
             <td class="w-auto py-4 text-sm text-gray-700">
               <div class="flex items-center gap-4">
-                <button class="flex items-center gap-2">
-                  <i class="fa-regular fa-pen-to-square" style="color: #374151;"></i>
+                <button class="flex items-center" (click)="openEditDialog(lecture.id)">
+                  <img class="w-7 h-7" src="assets/edit-icon.png" alt="Icone de editar">
                 </button>
                 <button class="flex items-center gap-2">
                   <i class="fa-regular fa-trash-can fa-flip-horizontal" style="color: #374151;"></i>

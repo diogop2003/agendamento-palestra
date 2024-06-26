@@ -10,6 +10,7 @@ import { ModalAddThemeComponent } from './theme/modal-add-theme/modal-add-theme.
 import { ModalEditSpeakerComponent } from './speaker/modal-edit-speaker/modal-edit-speaker.component';
 import { ModalEditThemeComponent } from './theme/modal-edit-theme/modal-edit-theme.component';
 import { ModalAddLectureComponent } from './lecture/modal-add-lecture/modal-add-lecture.component';
+import { ModalEditLectureComponent } from './lecture/modal-edit-lecture/modal-edit-lecture.component';
 
 
 
@@ -22,7 +23,8 @@ import { ModalAddLectureComponent } from './lecture/modal-add-lecture/modal-add-
     ModalAddThemeComponent,
     ModalEditSpeakerComponent,
     ModalEditThemeComponent,
-    ModalAddLectureComponent
+    ModalAddLectureComponent,
+    ModalEditLectureComponent
   ],
   imports: [
     CommonModule,
