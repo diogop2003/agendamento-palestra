@@ -35,8 +35,8 @@ export class LecturesService {
     return this.http.put(url, lecture);
   }
 
-  deleteLecture(id: string): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
+  deleteLecture(id: number): Observable<any> {
+    const url = `${this.apiUrl}/lectures/${id}`;
     return this.http.delete(url);
   }
 
