@@ -44,7 +44,9 @@ Esta aplicação permite agendar palestras com temas e palestrantes, fornecendo 
 
 Pré-requisitos
 
-- Docker e Docker Compose instalados na máquina
+- Docker e Docker Compose instalados na máquina.
+- Angular CLI instalado na máquina.
+- NestJS instalado na máquina.
 
 # Passos para Executar a Aplicação
 
