@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Lecture, Speaker, Theme } from '../../services/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAddLectureComponent } from './modal-add-lecture/modal-add-lecture.component';
+import { ModalEditLectureComponent } from './modal-edit-lecture/modal-edit-lecture.component';
 
 @Component({
   selector: 'app-lecture',
@@ -60,6 +61,18 @@ export class LectureComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'added') {
+        this.loadLectures();
+      }
+    });
+  }
+
+  openEditDialog(lectureId: number): void {
+    const dialogRef = this.dialog.open(ModalEditLectureComponent, {
+      data: { id: lectureId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'updated') {
         this.loadLectures();
       }
     });

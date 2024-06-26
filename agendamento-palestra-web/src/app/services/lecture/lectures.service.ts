@@ -30,13 +30,17 @@ export class LecturesService {
     return this.http.post(`${this.apiUrl}/lectures/`, lecture);
   }
 
-  updateLecture(id: string, lecture: any): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
+  updateLecture(id: number, lecture: any): Observable<any> {
+    const url = `${this.apiUrl}/lectures/${id}`;
     return this.http.put(url, lecture);
   }
 
   deleteLecture(id: string): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url);
+  }
+
+  getLectureById(id: number): Observable<Lecture> {
+    return this.http.get<Lecture>(`${this.apiUrl}/lectures/${id}`);
   }
 }
