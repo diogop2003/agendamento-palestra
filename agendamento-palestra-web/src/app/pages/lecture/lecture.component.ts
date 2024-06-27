@@ -40,6 +40,7 @@ export class LectureComponent implements OnInit {
               ...lecture,
               speaker: result.speaker.name,
               theme: result.theme.title,
+              date: this.formatDate(lecture.date),
               time: this.formatTime(lecture.time ?? '')
             }))
           );
@@ -73,6 +74,13 @@ export class LectureComponent implements OnInit {
     }
     const date = this.convertTimeToDate(time);
     return this.datePipe.transform(date, 'HH:mm') ?? '';
+  }
+
+  formatDate(date: string | null): string {
+    if (!date) {
+      return '';
+    }
+    return this.datePipe.transform(date, 'dd/MM/yyyy') ?? '';
   }
 
   openDialog(): void {
