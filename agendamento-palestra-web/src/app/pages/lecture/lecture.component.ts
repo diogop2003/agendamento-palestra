@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalAddLectureComponent } from './modal-add-lecture/modal-add-lecture.component';
 import { ModalEditLectureComponent } from './modal-edit-lecture/modal-edit-lecture.component';
 import { ModalRemoveLectureComponent } from './modal-remove-lecture/modal-remove-lecture.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-lecture',
@@ -17,7 +18,11 @@ export class LectureComponent implements OnInit {
   
   lectures: Lecture[] = [];
 
-  constructor(private lecturesService: LecturesService, public dialog: MatDialog) {}
+  constructor(
+    private lecturesService: LecturesService,
+    public dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.loadLectures();
@@ -34,7 +39,8 @@ export class LectureComponent implements OnInit {
             map((result: { speaker: Speaker; theme: Theme }) => ({
               ...lecture,
               speaker: result.speaker.name,
-              theme: result.theme.title
+              theme: result.theme.title,
+              time: this.formatTime(lecture.time ?? '')
             }))
           );
         });
@@ -52,6 +58,21 @@ export class LectureComponent implements OnInit {
         console.error('Erro ao carregar as palestras:', error);
       }
     });
+  }
+
+  convertTimeToDate(time: string): Date {
+    const [hours, minutes, seconds] = time.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, seconds, 0);
+    return date;
+  }
+
+  formatTime(time: string | null): string {
+    if (!time) {
+      return '';
+    }
+    const date = this.convertTimeToDate(time);
+    return this.datePipe.transform(date, 'HH:mm') ?? '';
   }
 
   openDialog(): void {
@@ -90,5 +111,4 @@ export class LectureComponent implements OnInit {
       }
     });
   }
-  
 }

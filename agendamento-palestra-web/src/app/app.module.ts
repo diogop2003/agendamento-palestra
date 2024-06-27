@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-    provideNgxMask()
+    provideNgxMask(),
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
