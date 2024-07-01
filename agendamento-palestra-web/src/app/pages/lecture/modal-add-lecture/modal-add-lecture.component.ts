@@ -5,6 +5,7 @@ import { Lecture, Speaker, Theme } from '../../../services/interfaces';
 import { SpeakersService } from '../../../services/speaker/speakers.service';
 import { ThemesService } from '../../../services/theme/themes.service';
 import { LecturesService } from '../../../services/lecture/lectures.service';
+import { dateBeforeTodayValidator } from '../../../validators/dateValidators';
 
 @Component({
   selector: 'app-modal-add-lecture',
@@ -24,12 +25,13 @@ export class ModalAddLectureComponent {
     private lectureService: LecturesService
   ) {
     this.lectureForm = this.fb.group({
-      time: ['', Validators.required],
-      date: ['', Validators.required],
+      time: ['', [Validators.required, Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/), Validators.maxLength(5)]],
+      date: ['', [Validators.required, dateBeforeTodayValidator()]],
       speaker: ['', Validators.required],
       theme: ['', Validators.required]
     });
   }
+  
 
   ngOnInit(): void {
     this.loadSpeakers();
