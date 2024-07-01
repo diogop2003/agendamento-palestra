@@ -1,30 +1,49 @@
 <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <form [formGroup]="editLectureForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-6 rounded-xl px-12 py-6 bg-white shadow-lg">
-      <div class="flex flex-col gap-1">
-        <label for="time">Horário</label>
-        <input type="text" id="time" formControlName="time" placeholder="18:30" class="h-8 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" />
+  <form [formGroup]="editLectureForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-6 rounded-xl px-12 py-6 bg-white shadow-lg">
+    <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': editLectureForm.get('time')?.invalid && editLectureForm.get('time')?.touched}">
+      <label for="time">Horário</label>
+      <input type="text" id="time" formControlName="time" placeholder="18:30" maxlength="5" class="h-8 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': editLectureForm.get('time')?.invalid && editLectureForm.get('time')?.touched}" />
+      <div *ngIf="editLectureForm.get('time')?.invalid && editLectureForm.get('time')?.touched" class="text-red-600 text-sm">
+        <div *ngIf="editLectureForm.get('time')?.errors?.['required']">Horário é obrigatório.</div>
+        <div *ngIf="editLectureForm.get('time')?.errors?.['pattern']">Horário inválido.(Use nesse formato 12:00)</div>
+        <div *ngIf="editLectureForm.get('time')?.errors?.['maxlength']">Horário deve ter no máximo 5 caracteres.</div>
       </div>
-      <div class="flex flex-col gap-1">
-        <label for="date">Data</label>
-        <input type="date" id="date" formControlName="date" placeholder="24/12" class="h-8 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" />
+    </div>
+    <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': editLectureForm.get('date')?.invalid && editLectureForm.get('date')?.touched}">
+      <label for="date">Data</label>
+      <input type="date" id="date" formControlName="date" class="h-8 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': editLectureForm.get('date')?.invalid && editLectureForm.get('date')?.touched}" />
+      <div *ngIf="editLectureForm.get('date')?.invalid && editLectureForm.get('date')?.touched" class="text-red-600 text-sm">
+        <div *ngIf="editLectureForm.get('date')?.errors?.['dateBeforeToday']">A data não pode ser anterior a hoje.</div>
+        <div *ngIf="editLectureForm.get('date')?.errors?.['required']">Data é obrigatória.</div>
       </div>
-      <div class="flex flex-col gap-1">
-        <label for="speaker">Palestrante</label>
-        <select id="speaker" formControlName="speaker" class="h-10 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300">
-          <option value="" disabled>Selecione um palestrante</option>
-          <option *ngFor="let speaker of speakers" [value]="speaker.id">{{ speaker.name }}</option>
-        </select>
+    </div>
+    <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': editLectureForm.get('speaker')?.invalid && editLectureForm.get('speaker')?.touched}">
+      <label for="speaker">Palestrante</label>
+      <select id="speaker" formControlName="speaker" class="h-10 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': editLectureForm.get('speaker')?.invalid && editLectureForm.get('speaker')?.touched}">
+        <option value="" disabled>Selecione um palestrante</option>
+        <option *ngFor="let speaker of speakers" [value]="speaker.id">{{ speaker.name }}</option>
+      </select>
+      <div *ngIf="editLectureForm.get('speaker')?.invalid && editLectureForm.get('speaker')?.touched" class="text-red-600 text-sm">
+        <div *ngIf="editLectureForm.get('speaker')?.errors?.['required']">Palestrante é obrigatório.</div>
       </div>
-      <div class="flex flex-col gap-1">
-        <label for="theme">Tema</label>
-        <select id="theme" formControlName="theme" class="h-10 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300">
-          <option value="" disabled>Selecione um tema</option>
-          <option *ngFor="let theme of themes" [value]="theme.id">{{ theme.title }}</option>
-        </select>
+    </div>
+    <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': editLectureForm.get('theme')?.invalid && editLectureForm.get('theme')?.touched}">
+      <label for="theme">Tema</label>
+      <select id="theme" formControlName="theme" class="h-10 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': editLectureForm.get('theme')?.invalid && editLectureForm.get('theme')?.touched}">
+        <option value="" disabled>Selecione um tema</option>
+        <option *ngFor="let theme of themes" [value]="theme.id">{{ theme.title }}</option>
+      </select>
+      <div *ngIf="editLectureForm.get('theme')?.invalid && editLectureForm.get('theme')?.touched" class="text-red-600 text-sm">
+        <div *ngIf="editLectureForm.get('theme')?.errors?.['required']">Tema é obrigatório.</div>
       </div>
-      <div class="flex gap-8">
-        <button type="submit" class="w-40 rounded-md bg-gray-700 py-4 font-bold text-white transition duration-150 ease-in-out hover:border hover:border-gray-700 hover:bg-white hover:text-gray-700">Salvar</button>
-        <button type="button" (click)="closeDialog()" class="w-40 rounded-md border border-gray-700 bg-white py-4 font-bold text-gray-700 transition duration-150 ease-in-out hover:border hover:border-gray-700 hover:bg-gray-700 hover:text-white">Fechar</button>
-      </div>
-    </form>
+    </div>
+    <div class="flex gap-8">
+      <button type="submit" class="w-40 rounded-md bg-gray-700 py-4 font-bold text-white transition duration-150 ease-in-out hover:border hover:border-gray-700 hover:bg-white hover:text-gray-700" [disabled]="editLectureForm.invalid">
+        Salvar
+      </button>
+      <button type="button" (click)="closeDialog()" class="w-40 rounded-md border border-gray-700 bg-white py-4 font-bold text-gray-700 transition duration-150 ease-in-out hover:border hover:border-gray-700 hover:bg-gray-700 hover:text-white">
+        Fechar
+      </button>
+    </div>
+  </form>
 </div>
