@@ -41,14 +41,15 @@ export class LectureComponent implements OnInit {
               speaker: result.speaker.name,
               theme: result.theme.title,
               date: this.formatDate(lecture.date),
-              time: this.formatTime(lecture.time ?? '')
+              time: this.formatTime(lecture.time ?? ''),
+              originalDate: new Date(lecture.date)
             }))
           );
         });
   
         forkJoin(observables).subscribe({
-          next: (lecturesWithDetails: Lecture[]) => {
-            this.lectures = lecturesWithDetails;
+          next: (lecturesWithDetails: any[]) => {
+            this.lectures = lecturesWithDetails.sort((a, b) => a.originalDate - b.originalDate);
           },
           error: (error) => {
             console.error('Erro ao carregar os detalhes das palestras:', error);
@@ -60,6 +61,8 @@ export class LectureComponent implements OnInit {
       }
     });
   }
+  
+  
 
   convertTimeToDate(time: string): Date {
     const [hours, minutes, seconds] = time.split(':').map(Number);
