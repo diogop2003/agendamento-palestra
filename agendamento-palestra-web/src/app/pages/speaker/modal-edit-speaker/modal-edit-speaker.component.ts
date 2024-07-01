@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SpeakersService } from '../../../services/speaker/speakers.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Speaker } from '../../../services/interfaces';
@@ -35,6 +35,45 @@ export class ModalEditSpeakerComponent implements OnInit {
         console.error('Error fetching speaker:', error);
       }
     });
+  }
+
+  onPhoneNumberChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    // Remove todos os caracteres que não são dígitos
+    let cleaned = ('' + value).replace(/\D/g, '');
+
+    // Limite o número a 11 dígitos
+    if (cleaned.length > 11) {
+      cleaned = cleaned.slice(0, 11);
+    }
+
+    // Formate o número se ele tiver 11 dígitos
+    if (cleaned.length === 11) {
+      let match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+      if (match) {
+        this.editSpeakerForm.controls['phone'].setValue(`(${match[1]}) ${match[2]}-${match[3]}`, { emitEvent: false });
+      }
+    } else {
+      this.editSpeakerForm.controls['phone'].setValue(value, { emitEvent: false });
+    }
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent) {
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '-'];
+    if (!allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  phoneValidator(control: AbstractControl) {
+    const phone = control.value;
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length !== 11) {
+      return { invalidPhoneLength: true };
+    }
+    return null;
   }
 
   onSubmit(): void {
