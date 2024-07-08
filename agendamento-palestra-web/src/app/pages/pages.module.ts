@@ -12,9 +12,7 @@ import { ModalEditThemeComponent } from './theme/modal-edit-theme/modal-edit-the
 import { ModalAddLectureComponent } from './lecture/modal-add-lecture/modal-add-lecture.component';
 import { ModalEditLectureComponent } from './lecture/modal-edit-lecture/modal-edit-lecture.component';
 import { ModalRemoveLectureComponent } from './lecture/modal-remove-lecture/modal-remove-lecture.component';
-
-
-
+import { ErrorComponent } from './error/error.component';
 @NgModule({
   declarations: [
     LectureComponent,
@@ -26,7 +24,8 @@ import { ModalRemoveLectureComponent } from './lecture/modal-remove-lecture/moda
     ModalEditThemeComponent,
     ModalAddLectureComponent,
     ModalEditLectureComponent,
-    ModalRemoveLectureComponent
+    ModalRemoveLectureComponent,
+    ErrorComponent
   ],
   imports: [
     CommonModule,
