@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { DatePipe } from '@angular/common';
+import { CloseButtonDirective } from './directive/close-button.directive';
 
 @NgModule({
   declarations: [
