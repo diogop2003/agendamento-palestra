@@ -4,7 +4,9 @@
           Tem certeza que deseja excluir essa palestra?
       </p>
       <div class="flex gap-8 justify-center">
-          <button type="button" (click)="removeLecture()" class="w-40 rounded-md bg-gray-700 py-4 font-bold text-white transition duration-150 ease-in-out hover:border hover:border-gray-700 hover:bg-white hover:text-gray-700">Sim</button>
+          <button type="button" (click)="removeLecture()" saveButtonStyle>
+            Sim
+          </button>
           <button type="button" (click)="closeDialog()" closeButtonStyle>
             Não
           </button>
