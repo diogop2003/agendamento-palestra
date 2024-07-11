@@ -28,13 +28,12 @@
       </div>
       <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': themeForm.get('summary')?.invalid && themeForm.get('summary')?.touched}">
         <label for="summary">Descrição</label>
-        <input 
-          type="text" 
+        <textarea 
           id="summary" 
-          formControlName="summary" 
-          placeholder="Uma conversa sobre os pontos positivos e negativos da IA" 
-          class="h-8 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300"
-          />
+          rows="4"
+          formControlName="summary"
+          class="w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" 
+          placeholder="Uma conversa sobre os pontos positivos e negativos da IA" ></textarea>
         <div *ngIf="themeForm.get('summary')?.invalid && themeForm.get('summary')?.touched" class="text-red-600 text-sm">
           <div *ngIf="themeForm.get('summary')?.errors?.['required']">Descrição é obrigatório.</div>
         </div>
