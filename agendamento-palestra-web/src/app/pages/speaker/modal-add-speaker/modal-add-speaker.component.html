@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="flex gap-8">
-      <button type="submit" class="w-40 rounded-md bg-gray-700 py-4 font-bold text-white transition duration-150 ease-in-out hover:border hover:border-gray-700 hover:bg-white hover:text-gray-700" [disabled]="speakerForm.invalid">
+      <button type="submit" saveButtonStyle [disabled]="speakerForm.invalid">
         Salvar
       </button>
       <button type="button" (click)="closeDialog()" closeButtonStyle>
