@@ -32,7 +32,7 @@
       id="summary"
       formControlName="summary"
       rows="4" 
-      class="w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" 
+      class="w-72 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" 
       placeholder="Uma conversa sobre os pontos positivos e negativos da IA" ></textarea>
       <div *ngIf="editThemeForm.get('summary')?.invalid && editThemeForm.get('summary')?.touched" class="text-red-600 text-sm">
         <div *ngIf="editThemeForm.get('summary')?.errors?.['required']">Descrição é obrigatório.</div>
