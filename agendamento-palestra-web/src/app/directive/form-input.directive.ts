@@ -9,11 +9,11 @@ export class FormInputDirective {
   }
   private applyInputStyles() {
     const classes = [
-      'h-8',
+      'h-10',
       'w-72',
       'rounded-md',
       'border',
-      'border-gray-700',
+      'border-gray-300',
       'px-2',
       'py-4',
       'placeholder:text-gray-300',
