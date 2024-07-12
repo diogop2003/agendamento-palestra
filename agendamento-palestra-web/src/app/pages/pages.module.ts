@@ -21,6 +21,7 @@ import { CloseButtonDirective } from '../directive/close-button.directive';
 import { SaveButtonDirective } from '../directive/save-button.directive';
 import { FormInputDirective } from '../directive/form-input.directive';
 import { TextAreaDirectiveDirective } from '../directive/text-area-directive.directive';
+import { AddButtonDirectiveDirective } from '../directive/add-button-directive.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TextAreaDirectiveDirective } from '../directive/text-area-directive.dir
     CloseButtonDirective,
     SaveButtonDirective,
     FormInputDirective,
-    TextAreaDirectiveDirective
+    TextAreaDirectiveDirective,
+    AddButtonDirectiveDirective
   ],
   imports: [
     CommonModule,
