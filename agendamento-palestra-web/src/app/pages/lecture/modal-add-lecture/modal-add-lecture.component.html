@@ -2,7 +2,14 @@
   <form [formGroup]="lectureForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-6 rounded-xl px-12 py-6 bg-white shadow-lg">
     <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': lectureForm.get('time')?.invalid && lectureForm.get('time')?.touched}">
       <label for="time">Horário</label>
-      <input type="text" id="time" formControlName="time" placeholder="18:30" maxlength="5" class="h-8 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': lectureForm.get('time')?.invalid && lectureForm.get('time')?.touched}" />
+      <input 
+        type="text" 
+        id="time" 
+        formControlName="time" 
+        placeholder="18:30" 
+        maxlength="5" 
+        formInputStyle 
+        [ngClass]="{'border-red-600': lectureForm.get('time')?.invalid && lectureForm.get('time')?.touched}" />
       <div *ngIf="lectureForm.get('time')?.invalid && lectureForm.get('time')?.touched" class="text-red-600 text-sm">
         <div *ngIf="lectureForm.get('time')?.errors?.['required']">Horário é obrigatório.</div>
         <div *ngIf="lectureForm.get('time')?.errors?.['pattern']">Horário inválido.(Use nesse formato 12:00)</div>
@@ -11,7 +18,12 @@
     </div>
     <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': lectureForm.get('date')?.invalid && lectureForm.get('date')?.touched}">
       <label for="date">Data</label>
-      <input type="date" id="date" formControlName="date" class="h-8 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': lectureForm.get('date')?.invalid && lectureForm.get('date')?.touched}" />
+      <input 
+        type="date" 
+        id="date" 
+        formControlName="date" 
+        formInputStyle 
+        [ngClass]="{'border-red-600': lectureForm.get('date')?.invalid && lectureForm.get('date')?.touched}" />
       <div *ngIf="lectureForm.get('date')?.invalid && lectureForm.get('date')?.touched" class="text-red-600 text-sm">
         <div *ngIf="lectureForm.get('date')?.errors?.['dateBeforeToday']">A data não pode ser anterior a hoje.</div>
         <div *ngIf="lectureForm.get('date')?.errors?.['required']">Data é obrigatória.</div>

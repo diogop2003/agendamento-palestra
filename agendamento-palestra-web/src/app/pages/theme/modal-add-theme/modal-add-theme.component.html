@@ -7,7 +7,7 @@
           id="title" 
           formControlName="title" 
           placeholder="Novas tecnologias" 
-          class="h-8 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" 
+          formInputStyle
           />
         <div *ngIf="themeForm.get('title')?.invalid && themeForm.get('title')?.touched" class="text-red-600 text-sm">
           <div *ngIf="themeForm.get('title')?.errors?.['required']">Título é obrigatório.</div>
@@ -20,7 +20,7 @@
           id="subject" 
           formControlName="subject" 
           placeholder="Conhecimentos sobre IA" 
-          class="h-8 w-60 rounded-md border border-gray-700 p-2 placeholder:text-gray-300" 
+          formInputStyle
           />
         <div *ngIf="themeForm.get('subject')?.invalid && themeForm.get('subject')?.touched" class="text-red-600 text-sm">
           <div *ngIf="themeForm.get('subject')?.errors?.['required']">Assunto é obrigatório.</div>
