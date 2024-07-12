@@ -20,6 +20,7 @@ import { ErrorComponent } from './error/error.component';
 import { CloseButtonDirective } from '../directive/close-button.directive';
 import { SaveButtonDirective } from '../directive/save-button.directive';
 import { FormInputDirective } from '../directive/form-input.directive';
+import { TextAreaDirectiveDirective } from '../directive/text-area-directive.directive';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FormInputDirective } from '../directive/form-input.directive';
     CloseButtonDirective,
     SaveButtonDirective,
     FormInputDirective,
+    TextAreaDirectiveDirective
   ],
   imports: [
     CommonModule,
