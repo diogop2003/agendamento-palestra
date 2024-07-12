@@ -19,6 +19,7 @@ import { ErrorComponent } from './error/error.component';
 // Diretiva
 import { CloseButtonDirective } from '../directive/close-button.directive';
 import { SaveButtonDirective } from '../directive/save-button.directive';
+import { FormInputDirective } from '../directive/form-input.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SaveButtonDirective } from '../directive/save-button.directive';
     ErrorComponent,
     CloseButtonDirective,
     SaveButtonDirective,
+    FormInputDirective,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { SaveButtonDirective } from '../directive/save-button.directive';
   exports: [
     CloseButtonDirective,
     SaveButtonDirective,
+    FormInputDirective,
   ]
 })
 export class PagesModule { }
