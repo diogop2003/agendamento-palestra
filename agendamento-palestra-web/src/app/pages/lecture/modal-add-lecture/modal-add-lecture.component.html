@@ -31,7 +31,7 @@
     </div>
     <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': lectureForm.get('speaker')?.invalid && lectureForm.get('speaker')?.touched}">
       <label for="speaker">Palestrante</label>
-      <select id="speaker" formControlName="speaker" class="h-10 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': lectureForm.get('speaker')?.invalid && lectureForm.get('speaker')?.touched}">
+      <select id="speaker" formControlName="speaker" class="h-10 w-72 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': lectureForm.get('speaker')?.invalid && lectureForm.get('speaker')?.touched}">
         <option value="" disabled>Selecione um palestrante</option>
         <option *ngFor="let speaker of speakers" [value]="speaker.id">{{ speaker.name }}</option>
       </select>
@@ -41,7 +41,7 @@
     </div>
     <div class="flex flex-col gap-1" [ngClass]="{'text-red-600': lectureForm.get('theme')?.invalid && lectureForm.get('theme')?.touched}">
       <label for="theme">Tema</label>
-      <select id="theme" formControlName="theme" class="h-10 w-60 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': lectureForm.get('theme')?.invalid && lectureForm.get('theme')?.touched}">
+      <select id="theme" formControlName="theme" class="h-10 w-72 rounded-md border p-2 placeholder:text-gray-300" [ngClass]="{'border-red-600': lectureForm.get('theme')?.invalid && lectureForm.get('theme')?.touched}">
         <option value="" disabled>Selecione um tema</option>
         <option *ngFor="let theme of themes" [value]="theme.id">{{ theme.title }}</option>
       </select>
