@@ -19,9 +19,9 @@ import { ErrorComponent } from './error/error.component';
 // Diretiva
 import { CloseButtonDirective } from '../directive/buttons/close-button.directive';
 import { AddButtonDirectiveDirective } from '../directive/buttons/add-button-directive.directive';
-import { SaveButtonDirective } from '../directive/buttons/save-button.directive';
 import { FormInputDirective } from '../directive/inputs/input/form-input.directive';
 import { TextAreaDirectiveDirective } from '../directive/inputs/text-area/text-area-directive.directive';
+import { SaveButtonDirective } from '../directive/buttons/save/save-button.directive';
 
 @NgModule({
   declarations: [
