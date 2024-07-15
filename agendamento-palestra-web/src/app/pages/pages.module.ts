@@ -17,11 +17,11 @@ import { ModalRemoveLectureComponent } from './lecture/modal-remove-lecture/moda
 import { ErrorComponent } from './error/error.component';
 
 // Diretiva
-import { CloseButtonDirective } from '../directive/close-button.directive';
-import { SaveButtonDirective } from '../directive/save-button.directive';
-import { FormInputDirective } from '../directive/form-input.directive';
-import { TextAreaDirectiveDirective } from '../directive/text-area-directive.directive';
-import { AddButtonDirectiveDirective } from '../directive/add-button-directive.directive';
+import { CloseButtonDirective } from '../directive/buttons/close-button.directive';
+import { AddButtonDirectiveDirective } from '../directive/buttons/add-button-directive.directive';
+import { SaveButtonDirective } from '../directive/buttons/save-button.directive';
+import { TextAreaDirectiveDirective } from '../directive/inputs/text-area-directive.directive';
+import { FormInputDirective } from '../directive/inputs/form-input.directive';
 
 @NgModule({
   declarations: [
@@ -47,10 +47,5 @@ import { AddButtonDirectiveDirective } from '../directive/add-button-directive.d
     PagesRoutesModule,
     ReactiveFormsModule
   ],
-  exports: [
-    CloseButtonDirective,
-    SaveButtonDirective,
-    FormInputDirective,
-  ]
 })
 export class PagesModule { }
