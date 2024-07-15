@@ -20,8 +20,8 @@ import { ErrorComponent } from './error/error.component';
 import { CloseButtonDirective } from '../directive/buttons/close-button.directive';
 import { AddButtonDirectiveDirective } from '../directive/buttons/add-button-directive.directive';
 import { SaveButtonDirective } from '../directive/buttons/save-button.directive';
-import { TextAreaDirectiveDirective } from '../directive/inputs/text-area-directive.directive';
-import { FormInputDirective } from '../directive/inputs/form-input.directive';
+import { FormInputDirective } from '../directive/inputs/input/form-input.directive';
+import { TextAreaDirectiveDirective } from '../directive/inputs/text-area/text-area-directive.directive';
 
 @NgModule({
   declarations: [
